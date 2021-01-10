@@ -40,6 +40,7 @@ namespace Rusu_Theona_Proiect_medii_de_programare
         Binding sizeTextBoxBinding = new Binding();
         Binding colorTextBoxBinding = new Binding();
         Binding priceTextBoxBinding = new Binding();
+        
         private void BindDataGrid()
         {
             var queryOrder = from ord in ctx.Orders
@@ -121,6 +122,27 @@ namespace Rusu_Theona_Proiect_medii_de_programare
             cmbInventory.SelectedValuePath = "ProductId";
 
 
+        }
+        private void SetValidationBinding()
+        {
+            Binding firstNameValidationBinding = new Binding();
+            firstNameValidationBinding.Source = customerViewSource;
+            firstNameValidationBinding.Path = new PropertyPath("FirstName");
+            firstNameValidationBinding.NotifyOnValidationError = true;
+            firstNameValidationBinding.Mode = BindingMode.TwoWay;
+            firstNameValidationBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+            //string required
+            firstNameValidationBinding.ValidationRules.Add(new StringNotEmpty());
+            firstNameTextBox.SetBinding(TextBox.TextProperty, firstNameValidationBinding);
+            Binding lastNameValidationBinding = new Binding();
+            lastNameValidationBinding.Source = customerViewSource;
+            lastNameValidationBinding.Path = new PropertyPath("LastName");
+            lastNameValidationBinding.NotifyOnValidationError = true;
+            lastNameValidationBinding.Mode = BindingMode.TwoWay;
+            lastNameValidationBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+            //string min length validator
+            lastNameValidationBinding.ValidationRules.Add(new StringMinLengthValidator());
+            lastNameTextBox.SetBinding(TextBox.TextProperty, lastNameValidationBinding); //setare binding nou
         }
 
 
@@ -298,55 +320,63 @@ namespace Rusu_Theona_Proiect_medii_de_programare
         }
 
         private void btnSave1_Click(object sender, RoutedEventArgs e)
-        {
+        {   
             Customer customer = null;
+            
             if (action == ActionState.New)
             {
                 try
                 {
-
+                    
                     //instantiem Customer entity
                     customer = new Customer()
-                    {
-                        FirstName = firstNameTextBox.Text.Trim(),
-                        LastName = lastNameTextBox.Text.Trim(),
+                    {   
+                        FirstName = firstNameTextBox.Text.Trim(),                      
+                        LastName = lastNameTextBox.Text.Trim(),                        
                         Address = addressTextBox.Text.Trim(),
                         Email = emailTextBox.Text.Trim(),
                         PhoneNumber = phoneNumberTextBox.Text.Trim(),
+                        
                     };
                     //adaugam entitatea nou creata in context
-
-                    ctx.Customers.Add(customer);
+                    
+                    ctx.Customers.Add(customer);                    
                     customerViewSource.View.Refresh();
-                    //salvam modificarile
+                    //salvam modificarile                                       
                     ctx.SaveChanges();
+                     
                 }
                 //using System.Data;
                 catch (DataException ex)
-                {
+                {   
                     MessageBox.Show(ex.Message);
                 }
+               
             }
 
             else
                 if (action == ActionState.Edit)
             {
+                
                 try
-                {
+                {   
                     customer = (Customer)customerDataGrid.SelectedItem;
+                    SetValidationBinding();
                     customer.FirstName = firstNameTextBox.Text.Trim();
                     customer.LastName = lastNameTextBox.Text.Trim();
                     customer.Address = addressTextBox.Text.Trim();
                     customer.Email = emailTextBox.Text.Trim();
                     customer.PhoneNumber = phoneNumberTextBox.Text.Trim();
                     //salvam modificarile
+                    
                     ctx.SaveChanges();
+                   
                 }
                 catch (DataException ex)
                 {
-
                     MessageBox.Show(ex.Message);
                 }
+                
                 customerViewSource.View.Refresh();
 
                 customerViewSource.View.MoveCurrentTo(customer);
@@ -367,6 +397,7 @@ namespace Rusu_Theona_Proiect_medii_de_programare
                 }
                 customerViewSource.View.Refresh();
             }
+            
 
         }
 
@@ -445,13 +476,14 @@ namespace Rusu_Theona_Proiect_medii_de_programare
             addressTextBox.Text = "";
             emailTextBox.Text = "";
             phoneNumberTextBox.Text = "";
-
+            
             Keyboard.Focus(firstNameTextBox);
         }
 
         private void btnEdit1_Click(object sender, RoutedEventArgs e)
         {
             action = ActionState.Edit;
+            
             string tempFirstName = firstNameTextBox.Text.ToString();
             string tempLastName = lastNameTextBox.Text.ToString();
             string tempAddress = addressTextBox.Text.ToString();
@@ -480,6 +512,8 @@ namespace Rusu_Theona_Proiect_medii_de_programare
             addressTextBox.Text = tempAddress;
             emailTextBox.Text = tempEmail;
             phoneNumberTextBox.Text = tempPhoneNumber;
+            SetValidationBinding();
+
         }
 
         private void btnPrev1_Click(object sender, RoutedEventArgs e)

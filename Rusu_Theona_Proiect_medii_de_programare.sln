@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rusu_Theona_Proiect_medii_de_programare", "Rusu_Theona_Proiect_medii_de_programare.csproj", "{56600AD7-8A23-4C14-8528-4BD3A7E28681}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChloeShopModel", "..\ChloeShopModel\ChloeShopModel.csproj", "{ABCD9059-4C95-4EEA-9444-726929F8111F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56600AD7-8A23-4C14-8528-4BD3A7E28681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56600AD7-8A23-4C14-8528-4BD3A7E28681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56600AD7-8A23-4C14-8528-4BD3A7E28681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56600AD7-8A23-4C14-8528-4BD3A7E28681}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABCD9059-4C95-4EEA-9444-726929F8111F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABCD9059-4C95-4EEA-9444-726929F8111F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABCD9059-4C95-4EEA-9444-726929F8111F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABCD9059-4C95-4EEA-9444-726929F8111F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3D461463-812C-45FE-94D4-F4DBFB737F64}
+	EndGlobalSection
+EndGlobal
